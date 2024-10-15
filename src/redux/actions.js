@@ -14,6 +14,7 @@ export const submitForm = (formData) => async (dispatch) => {
       'Content-Type': 'multipart/form-data',
     },
   });
-  console.log(result)
+  console.log(result.data.message)
   dispatch({ type: SET_LOADING, payload: false });
+  dispatch({ type: FETCH_CAMPAIGNS, payload: result.data.message });
 };

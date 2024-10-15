@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { submitForm } from '../redux/actions';
 import { Button, MenuItem, Select, TextField, Grid, Container } from '@mui/material';
 
@@ -10,6 +10,8 @@ const CampaignForm = () => {
   const [campaignName, setCampaignName] = useState('');
   const [email_service, setService] = useState('');
   const [file, setFile] = useState(null);
+  const message = useSelector(state=>state.campaigns)
+  const loader = useSelector(state=>state.loading)
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -78,8 +80,12 @@ const CampaignForm = () => {
               Submit
             </Button>
           </Grid>
+          {message}
         </Grid>
       </form>
+      {loader?<div style={{zIndex:"99999999",color:"white",left:"0px", top:"0px",position:"fixed", height:"100vh", width:"100%", display:"flex", justifyContent:"center", alignItems:"center", background:"rgba(100,100,50,.8)"}}>
+        .......Loading
+      </div>:null}
     </Container>
   );
 };
